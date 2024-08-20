@@ -97,7 +97,7 @@ this ==paricular word== is high lighted here.
 ---------------------------------------------------
 
 <!-- to write down-->
-water chemist name H~2~O 
+H~2~O 
 
 ---------------------------------------------------
 
