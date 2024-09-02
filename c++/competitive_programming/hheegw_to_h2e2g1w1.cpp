@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <map>
 #include <string>
 
 std::string compress_string(std::string &input)
