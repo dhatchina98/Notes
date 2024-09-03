@@ -142,8 +142,76 @@ void explain_vector()
     v.erase(v.begin()+1);  
     
     // erase given limit of vector { 32, 14 } removed
-    v.erase(v.begin()+2, v.begin()+4);  
+    v.erase(v.begin()+2, v.begin()+4); 
+
+
+    //=========
+    // insert
+    //========= 
+
+     vector<int> v(2,100); // {100, 100}
+     v.insert(v.begin(), 300);  //  {300, 100, 100}
+     v.insert(v.begin() +1 , 2 , 10);  //  {300, 10, 10, 100, 100}
+
+     vector<int> copy(2, 50);  // {50, 50}
+     v.insert(v.begin() , copy.begin() , copy.end());  //  {50, 50, 300, 10, 10, 100, 100}
+
+
+    //=========
+    // others
+    //=========
+
+     // gives size 
+     cout << v.size() << endl;
+     
+     // pops out the last element {10, 20} 
+     v.pop_back(); // {10}
+
+     // v1 -> {10, 20}
+     // v2 -> {30, 40}
+     v1.swap(v2); // v1 -> {30, 40}  v2 -> {10, 20}
+
+     // clear the vector
+     v.clear();
+
+     // check vector is empty
+     cout << v.empty() << endl;
 
 }
 
 ```
+
+# 2. `List`
+
+- list is a container which dynamic in nature. it is exactly similar to vector but u can do front side operation as well.
+
+
+```c++
+
+using namespace std;
+
+void explain_list()
+{   
+    // declaration
+    list<int> ls;
+
+    // add element to end
+    ls.push_back(2); // {2}
+
+    // add element using its constructor
+    ls.emplace_back(4); // {2, 4}
+
+    // add element in front
+    ls.push_front(5);  // {5, 2, 4} 
+     
+    ls.emplace_front()  // {2,4}
+
+}
+
+```
+   
+### `Note:`
+- push front opertion u can achieve in vector by insert but insert is costlier than this push front because list is using double linked list and vector is using single linked list.
+
+- `begin()` , `end()` , `rbegin()` , `rend()` , `clear()` , `insert()` , `size()` , `swap()` all methods works same like vector in list also.
+     
