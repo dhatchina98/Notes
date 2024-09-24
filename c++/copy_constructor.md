@@ -292,3 +292,15 @@ numB: 7
 numA: 20
 numB: 7
 ```
+
+## Copy Constructor Parameter Breakdown
+
+```c++
+Number(const Number& anotherNum)
+  {
+   // content for deep copy
+  }
+```
+
+- here we have to use `const` keyword to restrict changes in given object
+- we can't pass `(Number anotherNum)` by value because, if pass parameter by value it will take one more copy and for that copy you need copy constructor but already you are trying to create copy constructor.this will cause `circular dependency`. so, we have to pass by reference that is the reason for `Number& anotherNum`.
