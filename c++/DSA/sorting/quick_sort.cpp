@@ -1,7 +1,7 @@
 #include <iostream>
-#include <utility>
-#include <cstdlib>
-#include <ctime>
+#include <utility> // for swap
+#include <cstdlib> // for rand
+#include <ctime>   // for time
 
 void quick_sort(int arr[], int length);
 void quick_sort_recursion(int arr[], int low, int high);
