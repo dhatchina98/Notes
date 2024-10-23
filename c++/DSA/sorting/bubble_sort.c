@@ -84,6 +84,27 @@ void most_optimized_bubble_sort(int arr[], int length)
     } while (swapped);
 }
 
+void practice(int arr[], int length)
+{
+    bool swapped = false;
+    int i = 0;
+
+    do
+    {
+        swapped = false;
+        for (int j = 0; j < (length - 1 - i); j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapped = true;
+            }
+        }
+        i++;
+    } while (swapped);
+}
 
 int main()
 {
@@ -91,6 +112,7 @@ int main()
     int arr1[] = {5, 2, 6, 9, 8, 1, 7, 3, 0, 4};
     int arr2[] = {5, 2, 6, 9, 8, 1, 7, 3, 0, 4};
     int arr3[] = {5, 2, 6, 9, 8, 1, 7, 3, 0, 4};
+    int arr4[] = {5, 2, 6, 9, 8, 1, 7, 3, 0, 4};
 
     int length = 10;
 
@@ -106,6 +128,10 @@ int main()
     print(arr3, length);
     most_optimized_bubble_sort(arr3, length);
     print(arr3, length);
+    printf("\npracice\n");
+    print(arr4, length);
+    practice(arr4, length);
+    print(arr4, length);
 
     return 0;
 }
