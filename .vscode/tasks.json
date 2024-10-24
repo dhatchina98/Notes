@@ -10,7 +10,7 @@
                 "-g",
                 "${file}",
                 "-o",
-                "C:\\Users\\dhatc\\Desktop\\GitHub\\bin\\compiled.exe"
+                "C:\\Users\\dhatc\\Desktop\\GitHub\\NOTES\\bin\\compiled.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"
