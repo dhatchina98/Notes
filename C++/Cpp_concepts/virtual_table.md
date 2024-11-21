@@ -19,7 +19,7 @@
 ### 3. Derive from Class
 - one class derives from the other class which already has a virtual table.
   
-- compiker copies the content of base class vtable. 
+- compiler copy the content of base class vtable. 
   
 ![broken](../../ref_images/vtbl3.png) 
 
@@ -80,6 +80,7 @@
 ![broken](../../ref_images/vtbl15.png) 
 
 - Note: Eventhough GetMemberA is overridden by DerivedClass, inside BaseClass constructor, 
+
 ![broken](../../ref_images/vtbl16.png)
 
 - the original function is going to be used.
