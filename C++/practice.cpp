@@ -1,50 +1,135 @@
 #include <iostream>
+#include <vector>
+#include <list>
 
-using namespace std;
-
-class Number
+template <class K, class V>
+class HashTable
 {
+
+private:
+    struct HashNode
+    {
+        K key;
+        V value;
+    };
+
+    std::vector<std::list<HashNode>> table;
+
+    int capacity;
+
+    int size;
+
+    int hashFunction( K key) const
+    {
+        return std::hash<K>{}(key) % capacity;
+    }
+
 public:
-    int *n;
-    Number(const Number &num)
+    HashTable(int cap) : capacity(cap), size(0)
     {
-        cout << "copy constructor" << endl;
-        n = (int *)malloc(sizeof(int));
-        *n = *(num.n);
+        table.resize(capacity);
     }
 
-    Number(int num)
+    void insert(const K &key, const V &value)
     {
-        n = (int *)malloc(sizeof(int));
-        *n = num;
-        cout << "default constructor" << endl;
+        int index = hashFunction(key);
+        for (auto &node : table[index])
+        {
+            if (node.key == key)
+            {
+                node.value = value;
+                return;
+            }
+        }
+        table[index].push_back({key, value});
+        size++;
     }
 
-    ~Number()
+    bool search(const K &key, V &value) const
     {
-        free(n);
+        int index = hashFunction(key);
+        for (auto &node : table[index])
+        {
+            if (node.key == key)
+            {
+                value = node.value;
+                return true;
+            }
+        }
+        return false;
     }
 
-    int get()
+    bool remove(const K &key)
     {
-        return *n;
+        int index = hashFunction(key);
+        for (auto it = table[index].begin(); it != table[index].end(); it++)
+        {
+            if (it->key == key)
+            {
+                table[index].erase(it);
+                size--;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void display() const
+    {
+        for (int i = 0; i < capacity; i++)
+        {
+            std::cout << "Bucket " << i << ":";
+            for (auto &node : table[i])
+            {
+                std::cout << " {" << node.key << ", " << node.value << "}";
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    int getSize() const
+    {
+        return size;
     }
 };
 
 int main()
 {
-    Number n(5);
 
-    cout << n.get() << endl;
+    HashTable<std::string, std::string> table(10);
 
-    Number n1 = n;
+    table.insert("hfthf", "hdfhdh");
+    table.insert("rhe", "ttj");
+    table.insert("etjkrk", "dtjrxrn");
+    table.insert("wrhzet", "tk7ltmx");
+    table.insert("jxryjz", "fyk7jxj");
 
-    cout << n1.get() << endl;
+    std::cout << "size : " << table.getSize() << std::endl;
 
-    *(n.n) = 10;
+    table.display();
 
-    cout << n.get() << endl;
-    cout << n1.get() << endl;
+    std::string value;
+    if (table.search("wrhzet", value))
+    {
+        std::cout << "value found : " << value << std::endl;
+    }
+    else
+    {
+        std::cout << "value not found" << std::endl;
+    }
+
+    if (table.remove("jxryjz"))
+    {
+        std::cout << "value removed" << std::endl;
+    }
+    else
+    {
+        std::cout << "value not found" << std::endl;
+    }
+    
+    std::cout << "size : " << table.getSize() << std::endl;
+
+    table.display();
 
     return 0;
 }
