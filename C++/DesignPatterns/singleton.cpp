@@ -1,5 +1,4 @@
 #include <iostream>
-#include <thread>
 
 using namespace std;
 
@@ -28,24 +27,31 @@ public:
     Singleton &operator=(Singleton &&) = delete;
 };
 
-
 int main()
 {
     Singleton &s1 = Singleton::getInstance();
 
-    cout << " value : " << s1.data << endl;
+    cout << " s1 value : " << s1.data << endl;
 
     s1.data = 10;
 
-    cout << " value : " << s1.data << endl;
+    cout << " s1 value : " << s1.data << endl;
 
     Singleton &s2 = Singleton::getInstance();
 
-    cout << " value : " << s2.data << endl;
+    cout << " s2 value : " << s2.data << endl;
 
     s1.data = 20;
 
-    cout << " value : " << s2.data << endl;
+    cout << " s1 value : " << s1.data << endl;
+    cout << " s2 value : " << s2.data << endl;
 
     return 0;
 }
+
+
+
+
+
+
+
