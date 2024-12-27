@@ -153,3 +153,105 @@ if(nowptr == NULL)
 printf("failed to find string\n");  // output ->  failed to find string
 
 ```
+
+## 4. `strtok()`
+
+- strtok means string tokenization 
+- its split it up based on some delimiters
+
+```c
+
+// string should be splitted
+char s[] = "This is the way.";
+
+// delimiter
+char d[] = " ";
+
+// first time we have to pass string and delimiter
+char *pointer1 = strtok(s,d);
+printf("%s\n",pointer1);  // output : This
+
+// from second time we have to pass NULL
+char *pointer2 = strtok(NULL,d);
+printf("%s\n",pointer2);  // output : is
+
+char *pointer3 = strtok(NULL,d);
+printf("%s\n",pointer3);  // output : the
+
+char *pointer4 = strtok(NULL,d);
+printf("%s\n",pointer4);  // output : way.
+
+// after string ends if you split ,it will return NULL pointer
+char *pointer5 = strtok(NULL,d);
+if(pointer5 == NULL) printf("we're done.\n");
+else printf("%s\n",pointer5);  // output : we're done.
+
+```
+- in this example we know only 4 words are there but in real cases we dont know how many times we should split it and when to stop so we can write the top code in optimized way like this,
+
+```c
+
+// string should be splitted
+char s[] = "This is the way.";
+
+// delimiter
+char d[] = " ";
+
+char *pointer = strtok(s,d);
+
+// iterating string until its become NULL
+while(pointer != NULL) 
+{
+  printf("%s\n",pointer);
+  portion = strtok(NULL,d);
+}
+
+// output :
+// This
+// is
+// the
+// way.
+
+```
+
+### NOTE:
+
+- while splitting it is giving substring pointer so to look outside maybe this function creating new string in heap with that sub string value and returning to us like that. 
+- but its not actually working like that. if u see the address of first substring and the input string both are same.
+- actually it is filling null terminator in the place of delimiter and returning the pointer thats why we get the substring.
+- if we dont want to change input string then,take copy of that and use that duplicate in this function so that input string still will be same.
+
+```c
+
+// string should be splitted
+char s[] = "This is the way.";
+
+// delimiter
+char d[] = " ";
+
+char *p1 = strtok(s,d);
+printf("p1 : %p\n",p1);  // output : 0x7ffeeed88930
+printf("s : %p\n",s);    // output : 0x7ffeeed88930
+
+```
+- to ensure its operation print and verify
+
+```c
+
+char *pointer = strtok(s,d);
+while(pointer != NULL) 
+{
+  printf("%s\n",pointer);
+  portion = strtok(NULL,d);
+}
+
+// after splitting printing string
+
+for (int i=0;i<24;i++)
+if (s[i] == '\0') printf("\\0");
+else printf("%c",s[i]);
+
+// output :
+// This\0is\0the\0way.\0\0  // delimiters replaced with null terminator
+
+```
