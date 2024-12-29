@@ -255,3 +255,125 @@ else printf("%c",s[i]);
 // This\0is\0the\0way.\0\0  // delimiters replaced with null terminator
 
 ```
+
+## 5. `strcat()` and `strncat()`
+
+- Theses Functions helps to concat two strings in c.
+
+```c
+// destination string
+char dest[20] = "This and"; 
+
+// string to be concat
+char src[5] = "That";
+
+// concat src with dest
+char * ptr = strcat(dest,src);
+
+printf("dest : %s\n",dest); // This and That
+printf(" ptr : %s\n",ptr);  // This and That
+
+printf("dest : %p\n",dest); // Address - 0x00FF4567YF
+printf(" ptr : %p\n",ptr);  // Address - 0x00FF4567YF
+
+
+char dest2[20] = "This and";
+char src2[5] = "That";
+
+// concat only n characters
+strncat(dest2,src2,2);
+
+printf("dest2 : %s\n",dest2); // This and Th
+
+strncat(dest2,src2,3);
+
+printf("dest2 : %s\n",dest2); // This and Tha
+
+```
+### NOTE:
+- dest char array should be larger enough to hold src char array also along with its null terminator.
+- function returns dest array pointer. so dest and return pointers are same.
+- strncat() only concat n character to the dest.
+
+
+## 6. `strchr()`
+
+- strchr() function which finds the first occurence of a character in a string.
+- it is not returning new substring 
+- its return the pointer to that substring of first occurence in a same string
+- if character not found returns NULL pointer
+
+```c
+
+char tweet[] = "This is my @mention";
+
+char *mention = strchr(tweet, '@');
+
+printf("mention : %s\n",mention); // @mention
+
+printf("%p\n",mention);    // 0x7ffeef40393b
+printf("%p\n",tweet + 11); // 0x7ffeef40393b
+
+mention[0] = '*';
+
+// original string also modified
+cc // This is my *mention
+
+// if character not found returns NULL
+if (strchr(tweet, '#') == NULL)
+ printf("strchr returned NULL\n");  // strchr returned NULL
+
+```
+
+## 7. `strrchr()`
+
+- strrchr function which finds the last occurence of a character in a string.
+- its return the sub string pointer of last occurence.
+- if its not found that character returns NULL pointer.
+  
+```c 
+
+char s[] = "some,data,in,commas";
+
+char *comma = strrchr(s,',');
+
+// return the substring of original string
+printf("%s\n",comma); // ,commas
+
+char *failed = strrchr(s,'@');
+
+if(failed == NULL)
+ printf("could not find @\n");
+
+```
+
+## 8. `strpbrk()`
+
+- strpbrk funtion which finds the first character in a string that matches one of the characters in another string.
+- returns the sub string char pointer of first occurence.
+- if it is not found returns NULL pointer.
+
+```c
+
+// input string
+char s[] = "AFHYJEBJS3456345";
+
+// one of the character from this should match
+char num[] = "0123456789";
+
+// returns the sub strimg char *
+char *match = strpbrk(s,num);
+
+printf("match : %s\n",match);  // 3456345
+
+// another check
+char punc[] = ",:;";
+
+// string doesn't contains any of these characters
+char *failed = strpbrk(s,punc);
+
+// returns NULL pointer
+if(failed == NULL)
+ printf("could not find @\n");
+
+```
