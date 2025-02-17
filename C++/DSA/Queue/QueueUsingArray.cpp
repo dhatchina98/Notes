@@ -43,7 +43,7 @@ public:
             cout << "Queue is Empty" << endl;
             return;
         }
-        arr[rear % cap] = -1;
+        arr[front % cap] = -1;
         front++;
         count--;
     }

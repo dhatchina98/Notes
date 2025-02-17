@@ -1,7 +1,40 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace std;
+// using namespace std;
+
+// class Base
+// {
+//     friend void getData(const Base &base);
+
+// protected:
+//     int pro;
+
+// private:
+//     int pri;
+
+// public:
+//     Base(int num)
+//     {
+//         pro = num;
+//         pri = num;
+//     }
+// };
+
+// void getData(const Base &base)
+// {
+//     cout << base.pri << endl;
+//     cout << base.pro << endl;
+// }
+
+// int main()
+// {
+//     Base b(10);
+
+//     getData(b);
+
+//     return 0;
+// }
 
 // // linkedlist
 // int main()
