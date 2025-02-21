@@ -22,7 +22,7 @@ public:
         *n = *(num.n);
     }
 
-    // destruvtor for deallocate memory
+    // destructor for deallocate memory
     ~Number()
     {
         free(n);

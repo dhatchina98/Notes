@@ -87,7 +87,7 @@ num2: 14
 ```
 
 ## Note :
-- copy constructor is not same as assignment operation
+- copy constructor is not same as copy assignment operation
 
 ```c++
 class BasicNumber
@@ -144,6 +144,7 @@ num2: 14
 class Number
 {
 public:
+  // pointer variable
   int *n;
 
   // constructor which dynamically allocates memory
@@ -178,32 +179,6 @@ int main()
     
     cout<<"numB: "<< numB.get() <<endl;
 
-    return 0;
-}
-```
-### output
-```
-numA: 7
-numB: 7
-```
-
-- here default copy constructor is used and output looks like everything fine but not.
-- it does shallow copy. it is copying the `numA int *` value to `numB int * `so, both has same address which means both are pointing same value in heap.
-
-- once we change of numA value in heap its changed in numB also.
-
-```c++
-int main()
-{
-    Number numA(7);
-
-    cout<<"numA: "<< numA.get() <<endl;
-    
-    // copy constructor
-    Number numB = numA;
-    
-    cout<<"numB: "<< numB.get() <<endl;
-
     // change value of numA n 
     *(numA.n)=20;
 
@@ -214,7 +189,7 @@ int main()
     exit(0);
 
     /**
-      when main reaches return both objects destructor will be called.but  both are pointing same memory in heap. so, its try to double free then code crashed.
+      when main reaches return both objects destructor will be called.but both are pointing same memory in heap. so, its try to double free then code crashed.
      */
     return 0;
 }
@@ -227,16 +202,33 @@ numA: 20
 numB: 20
 ```
 
+- here default copy constructor is used and output looks like everything fine but not.
+- it does shallow copy. it is copying the `numA int *` value to `numB int * `so, both has same address which means both are pointing same value in heap.
+
+- once we change of numA value in heap its changed in numB also.
+
 ## Deep Copy
 - here we are overriding the default copy constructor and deep copying the given object member value to this object member.
 - now both objects are pointing different `int *`. so, changes in one object will not affect another object. this is deep copy.
-- in another words deep copy means not only stack values we are duplicating the heap values also.
+- in another words deep copy means not only copying stack values we are creating the heap values also.
 
 ```c++
+#include <iostream>
+
+using namespace std;
+
 class Number
 {
 public:
+  // pointer variable
   int *n;
+
+  // normal constructor to allocate memory dynamically
+  Number(int num)
+  {
+    n = (int *) malloc(sizeof(int));
+    *n = num; 
+  } 
 
   // copy constructor for deep copy
   Number(const Number& anotherNum)
@@ -246,13 +238,8 @@ public:
     // deep copy the value
     *n = *(anotherNum.n);
   }
-
-  Number(int set_n)
-  {
-    n = (int *) malloc(sizeof(int));
-    *n = set_n; 
-  } 
   
+  // destructor for deallocate memory
   ~Number
   {
     free(n);
@@ -267,11 +254,12 @@ public:
 
 int main()
 {
+    // create object
     Number numA(7);
 
     cout<<"numA: "<< numA.get() <<endl;
     
-    // copy constructor
+    // copy object using copy constructor
     Number numB = numA;
     
     cout<<"numB: "<< numB.get() <<endl;
@@ -279,6 +267,7 @@ int main()
     // change value of numA n 
     *(numA.n)=20;
 
+    // verifying both object
     cout<<"numA: "<< numA.get() <<endl;
     cout<<"numB: "<< numB.get() <<endl;
     
