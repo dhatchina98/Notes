@@ -1,3 +1,4 @@
+## [<<< back](../Index.md)             
 # Copy Constructor 
 
 - copy constructor is member function of the object create the object using the another object of same class.
