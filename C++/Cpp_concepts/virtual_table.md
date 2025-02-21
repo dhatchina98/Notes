@@ -1,3 +1,4 @@
+## [< back](../../Index.md)   
 # Virtual Table (vtable)
 
 - C++ standard doesn't force any particular way the virtual functions should be implemented.

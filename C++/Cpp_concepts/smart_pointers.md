@@ -1,4 +1,4 @@
-
+## [< back](../../Index.md)   
 # smart pointers
 
 ### raw pointers con's
